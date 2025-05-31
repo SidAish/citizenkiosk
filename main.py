@@ -1,4 +1,5 @@
 import csv
+# import os.path
 
 print("Welcome to the Citizen Kiosk")
 def citizenDetails():
@@ -9,21 +10,26 @@ def citizenDetails():
     city = input('Which city are you from? ')
     print('You live in ' +city)
     citizen_dict = {'name': citizen, 'age': age, 'city':city}
-    with open('data/citizens.csv','a',newline='') as f:
+    with open('data/citizens.csv','w',newline='') as f:
+        # file_exists = os.path.isfile('data/citizens.csv')
         fieldNames = ['name','age','city']
         writer = csv.DictWriter(f,fieldnames=fieldNames)
         writer.writeheader()
+        # if file_exists():
+        # writer.writeheader()  
         writer.writerow(citizen_dict)
     return citizen_dict
-print(citizenDetails())
-answer = input('Do you want to add a new citizen? Y/N:')
-if (answer.upper() == 'Y'):
-    citizenDetails()
+# print(citizenDetails())
+while True:
+    answer = input('Do you want to add a new citizen? Y/N:')
+    if (answer.upper() == 'Y'):
+        citizenDetails()
     # print(citizenDetails)
-elif (answer.upper()!= 'N'):
-    print("incorrect option")
-else:
-    print('Thank you!')
+    elif (answer.upper()!= 'N'):
+        print("incorrect option")
+    else:
+        print('Thank you!')
+        break
 
 # my_file = open('greeting.txt','r') #w, a
 # print(my_file.read(10))
